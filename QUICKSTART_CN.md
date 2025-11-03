@@ -77,6 +77,9 @@ cd AI-Trader
 
 # 安装依赖
 pip install -r requirements.txt
+
+# 验证安装（可选）
+python test_basic_setup.py
 ```
 
 **核心依赖**：
@@ -84,6 +87,13 @@ pip install -r requirements.txt
 - `langchain-openai` - OpenAI集成
 - `langchain-mcp-adapters` - MCP协议适配器
 - `fastmcp` - MCP服务框架
+
+**验证脚本**：`test_basic_setup.py` 会检查：
+- Python版本是否符合要求
+- 所有依赖包是否正确安装
+- 项目结构是否完整
+- 数据文件是否存在
+- 配置文件是否有效
 
 ### 步骤 2：配置环境变量
 
