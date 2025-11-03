@@ -26,26 +26,23 @@ def check_python_version():
 def check_dependencies():
     """检查依赖包 / Check dependencies"""
     print("\n📦 检查依赖包 / Checking Dependencies:")
-    required_packages = [
-        'langchain',
-        'langchain_openai',
-        'langchain_mcp_adapters',
-        'fastmcp',
-        'dotenv'
-    ]
+    
+    # Mapping of import names to display names
+    package_mapping = {
+        'langchain': 'langchain',
+        'langchain_openai': 'langchain-openai',
+        'langchain_mcp_adapters': 'langchain-mcp-adapters',
+        'fastmcp': 'fastmcp',
+        'dotenv': 'python-dotenv'
+    }
     
     all_installed = True
-    for package in required_packages:
+    for import_name, display_name in package_mapping.items():
         try:
-            if package == 'dotenv':
-                __import__('dotenv')
-                module_name = 'python-dotenv'
-            else:
-                __import__(package)
-                module_name = package
-            print(f"   ✅ {module_name}")
+            __import__(import_name)
+            print(f"   ✅ {display_name}")
         except ImportError:
-            print(f"   ❌ {module_name} 未安装 / not installed")
+            print(f"   ❌ {display_name} 未安装 / not installed")
             all_installed = False
     
     return all_installed
@@ -191,22 +188,27 @@ def test_import_modules():
     """测试导入关键模块 / Test importing key modules"""
     print("\n🧪 测试模块导入 / Testing Module Imports:")
     
+    # Test module imports with validation functions
     modules_to_test = [
-        ('tools.general_tools', 'get_config_value'),
-        ('tools.price_tools', 'get_open_prices'),
-        ('prompts.agent_prompt', 'all_nasdaq_100_symbols'),
+        ('tools.general_tools', 'get_config_value', None),
+        ('tools.price_tools', 'get_open_prices', None),
+        ('prompts.agent_prompt', 'all_nasdaq_100_symbols', 
+         lambda x: f"包含 / Contains {len(x)} 个股票代码 / stock symbols"),
     ]
     
     all_good = True
-    for module_name, attr_name in modules_to_test:
+    for test_info in modules_to_test:
+        module_name, attr_name = test_info[0], test_info[1]
+        validator = test_info[2] if len(test_info) > 2 else None
+        
         try:
             module = __import__(module_name, fromlist=[attr_name])
             attr = getattr(module, attr_name)
             print(f"   ✅ {module_name}.{attr_name}")
             
-            # Special check for symbols
-            if attr_name == 'all_nasdaq_100_symbols':
-                print(f"      包含 / Contains {len(attr)} 个股票代码 / stock symbols")
+            # Run validator if provided
+            if validator and callable(validator):
+                print(f"      {validator(attr)}")
                 
         except Exception as e:
             print(f"   ❌ {module_name}.{attr_name}: {e}")
