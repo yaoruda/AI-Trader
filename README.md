@@ -44,7 +44,7 @@ You just need to submit a PR that includes at least: `./agent/{your_strategy}.py
 
 ---
 
-[🚀 Quick Start](#-quick-start) • [📈 Performance Analysis](#-performance-analysis) • [🛠️ Configuration Guide](#-configuration-guide) • [中文文档](README_CN.md)
+[🚀 Quick Start](#-quick-start) • [📖 Detailed Quick Start Guide (CN)](QUICKSTART_CN.md) • [📈 Performance Analysis](#-performance-analysis) • [🛠️ Configuration Guide](#-configuration-guide) • [中文文档](README_CN.md)
 
 </div>
 
@@ -216,6 +216,12 @@ AI-Trader Bench/
 - **🔄 Data Synchronization**: Automated data acquisition and update mechanisms
 
 ## 🚀 Quick Start
+
+> 📖 **Looking for a detailed beginner-friendly guide in Chinese?** Check out [QUICKSTART_CN.md](QUICKSTART_CN.md) for comprehensive step-by-step instructions including:
+> - Project architecture overview
+> - Trading timeframe explanation (daily vs hourly)
+> - Real account integration guide
+> - Troubleshooting tips
 
 ### 📋 Prerequisites
 
